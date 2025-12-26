@@ -40,6 +40,7 @@ export default function Career() {
           method: "POST",
           // Note: Don't set Content-Type header when sending FormData
           body: formData,
+          credentials: "include",
         }
       );
 
@@ -136,4 +137,5 @@ export default function Career() {
       </div>
     </div>
   );
+
 }
