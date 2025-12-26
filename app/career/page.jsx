@@ -34,7 +34,7 @@ export default function Career() {
 
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/careers/`,
+      `${process.env.NEXT_PUBLIC_API_URL}api/careers/`,
       {
         method: "POST",
         body: formData,
@@ -145,4 +145,5 @@ export default function Career() {
   );
 
 }
+
 
