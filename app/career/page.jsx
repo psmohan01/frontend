@@ -21,37 +21,43 @@ export default function Career() {
     }
   };
 
-  const submitForm = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+ const submitForm = async (e) => {
+  e.preventDefault();
+  setLoading(true);
 
-    // Using FormData to handle file uploads
-    const formData = new FormData();
-    formData.append("name", form.name);
-    formData.append("email", form.email);
-    formData.append("position", form.position);
-    formData.append("message", form.message);
-    if (form.resume) formData.append("resume", form.resume);
+  const formData = new FormData();
+  formData.append("name", form.name);
+  formData.append("email", form.email);
+  formData.append("position", form.position);
+  formData.append("message", form.message);
+  if (form.resume) formData.append("resume", form.resume);
 
-    try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/careers/`,
-        {
-          method: "POST",
-          // Note: Don't set Content-Type header when sending FormData
-          body: formData,
-          credentials: "include",
-        }
-      );
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/careers/`,
+      {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      }
+    );
 
-      const data = await res.json();
-      alert(data.message || "Application submitted successfully!");
-    } catch (error) {
-      alert(error.message || "Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
+    // ✅ IMPORTANT: check response status first
+    if (!res.ok) {
+      const errorText = await res.text(); // backend error (HTML or JSON)
+      console.error("Backend error:", errorText);
+      throw new Error("Failed to submit application");
     }
-  };
+
+    const data = await res.json();
+    alert(data.message || "Application submitted successfully!");
+  } catch (error) {
+    alert("Something went wrong. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-6">
@@ -139,3 +145,4 @@ export default function Career() {
   );
 
 }
+
