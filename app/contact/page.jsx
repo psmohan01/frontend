@@ -1,48 +1,4 @@
-// 'use client';
 
-// import { useState } from "react";
-
-// export default function Contact() {
-//   const [form, setForm] = useState({
-//     name: "",
-//     email: "",
-//     message: ""
-//   });
-
-//   const handleChange = (e) => {
-//     setForm({ ...form, [e.target.name]: e.target.value });
-//   };
-
-//   const submitForm = async (e) => {
-//     e.preventDefault();
-
-//     const res = await fetch(
-//       `${process.env.NEXT_PUBLIC_API_URL}/api/contact/`,
-//       {
-//         method: "POST",
-//         headers: { "Content-Type": "application/json" },
-//         body: JSON.stringify(form),
-//       }
-//     );
-
-//     const data = await res.json();
-//     alert(data.message);
-//   };
-
-//   return (
-//     <form onSubmit={submitForm}>
-//       <input name="name" placeholder="Name" onChange={handleChange} style={{backgroundColor: "lightgray", color: "black",width: "300px"} }/><br/>
-//       <input name="email" placeholder="Email" onChange={handleChange} style={{backgroundColor: "lightgray", color: "black",width: "300px"} }/><br/>
-//       <textarea name="message" placeholder="Message" onChange={handleChange} style={{backgroundColor: "lightgray", color: "black",width: "300px"} }></textarea><br/>
-//       <button type="submit">Send</button>
-//     </form>
-  
-
-
-
-
-//   );
-// }
 'use client';
 
 import { useState } from "react";
@@ -65,7 +21,7 @@ export default function Contact() {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/contact/`,
+        `${process.env.NEXT_PUBLIC_API_URL}api/contact/`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -134,4 +90,5 @@ export default function Contact() {
       </div>
     </div>
   );
+
 }
